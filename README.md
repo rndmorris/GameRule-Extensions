@@ -111,7 +111,6 @@ public class ExampleCustomGameRule implements IGameRule {
 
     @Override
     public void writeValueToNBT(NBTTagCompound tag, IRuleValue value) {
-        // noinspection rawtypes
         if (value instanceof EnumValue storedVal && storedVal.getValue() instanceof ModDifficulty enumVal) {
             tag.setByte(name, enumVal.toByte());
         }
