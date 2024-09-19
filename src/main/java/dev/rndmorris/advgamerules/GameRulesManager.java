@@ -10,7 +10,7 @@ import dev.rndmorris.advgamerules.api.IGameRules;
 import dev.rndmorris.advgamerules.api.rules.BooleanGameRule;
 import dev.rndmorris.advgamerules.interfaces.IMixinGameRules;
 
-public class GameRuleManager {
+public class GameRulesManager {
 
     public final static Map<String, IGameRule> gameRules = new HashMap<>();
 

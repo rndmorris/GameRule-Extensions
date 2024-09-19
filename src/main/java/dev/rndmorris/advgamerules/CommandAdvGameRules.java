@@ -38,8 +38,8 @@ public class CommandAdvGameRules extends CommandBase {
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
         if (args.length == 1) {
             final var results = new ArrayList<String>(9);
-            results.addAll(GameRuleManager.vanillaGameRules.keySet());
-            results.addAll(GameRuleManager.gameRules.keySet());
+            results.addAll(GameRulesManager.vanillaGameRules.keySet());
+            results.addAll(GameRulesManager.gameRules.keySet());
             return CommandBase.getListOfStringsFromIterableMatchingLastWord(args, results);
         }
         return null;

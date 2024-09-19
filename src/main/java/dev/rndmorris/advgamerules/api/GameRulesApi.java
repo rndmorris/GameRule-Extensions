@@ -2,7 +2,7 @@ package dev.rndmorris.advgamerules.api;
 
 import net.minecraft.world.World;
 
-import dev.rndmorris.advgamerules.GameRuleManager;
+import dev.rndmorris.advgamerules.GameRulesManager;
 
 public class GameRulesApi {
 
@@ -13,11 +13,11 @@ public class GameRulesApi {
      * @return True if the game rule was added, false if a game rule of the same name already exists.
      */
     public static boolean registerGameRule(IGameRule newGameRule) {
-        return GameRuleManager.registerGameRule(newGameRule);
+        return GameRulesManager.registerGameRule(newGameRule);
     }
 
     public static IGameRules getGameRules(World world) {
-        return GameRuleManager.getGameRules(world);
+        return GameRulesManager.getGameRules(world);
     }
 
     /**

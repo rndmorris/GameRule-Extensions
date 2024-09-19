@@ -37,7 +37,7 @@ public class GameRulesWrapper implements IGameRules {
             // noinspection unchecked
             return (I) ruleValue;
         }
-        final var definition = GameRuleManager.gameRules.get(ruleName);
+        final var definition = GameRulesManager.gameRules.get(ruleName);
         if (definition == null) {
             throw new IllegalArgumentException(
                 String.format("Game rule %s does not exist and was not registered.", ruleName));

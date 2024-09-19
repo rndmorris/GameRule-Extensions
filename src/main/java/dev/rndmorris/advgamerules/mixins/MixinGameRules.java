@@ -5,8 +5,6 @@ import java.util.TreeMap;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.GameRules;
 
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -15,13 +13,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import dev.rndmorris.advgamerules.GameRuleManager;
+import dev.rndmorris.advgamerules.GameRulesManager;
 import dev.rndmorris.advgamerules.api.IRuleValue;
 import dev.rndmorris.advgamerules.api.values.BooleanValue;
 import dev.rndmorris.advgamerules.interfaces.IMixinGameRules;
 
 @Mixin(GameRules.class)
-//@Implements(value = @Interface(iface = IMixinGameRules.class, prefix = "advgamerules$"))
 public abstract class MixinGameRules implements IMixinGameRules {
 
     @Shadow
@@ -32,7 +29,7 @@ public abstract class MixinGameRules implements IMixinGameRules {
 
     @Inject(method = "<init>*", at = @At(value = "RETURN"), remap = false)
     public void onInit(CallbackInfo ci) {
-        for (var rule : GameRuleManager.gameRules.values()) {
+        for (var rule : GameRulesManager.gameRules.values()) {
             final var name = rule.getName();
             theGameRules.put(name, rule.getDefaultValue());
         }
@@ -90,7 +87,7 @@ public abstract class MixinGameRules implements IMixinGameRules {
         var set = tag.func_150296_c();
 
         for (var name : set) {
-            final var definition = GameRuleManager.getRuleDefinition(name);
+            final var definition = GameRulesManager.getRuleDefinition(name);
             if (definition == null) {
                 continue;
             }
@@ -108,7 +105,7 @@ public abstract class MixinGameRules implements IMixinGameRules {
         final var tag = new NBTTagCompound();
 
         for (var entry : theGameRules.entrySet()) {
-            final var definition = GameRuleManager.getRuleDefinition(entry.getKey());
+            final var definition = GameRulesManager.getRuleDefinition(entry.getKey());
             if (definition == null) {
                 continue;
             }
