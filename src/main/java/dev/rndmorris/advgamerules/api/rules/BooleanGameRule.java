@@ -1,5 +1,9 @@
 package dev.rndmorris.advgamerules.api.rules;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import net.minecraft.command.ICommandSender;
 import net.minecraft.nbt.NBTTagCompound;
 
 import dev.rndmorris.advgamerules.api.IGameRule;
@@ -39,5 +43,13 @@ public class BooleanGameRule implements IGameRule {
         if (value instanceof BooleanValue boolValue) {
             tag.setBoolean(name, boolValue.getValue());
         }
+    }
+
+    @Override
+    public Collection<String> tabCompletionValues(ICommandSender commandSender) {
+        final var result = new ArrayList<String>(2);
+        result.set(0, "true");
+        result.set(1, "false");
+        return result;
     }
 }

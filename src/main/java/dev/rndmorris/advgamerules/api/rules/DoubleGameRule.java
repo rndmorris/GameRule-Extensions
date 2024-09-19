@@ -1,5 +1,8 @@
 package dev.rndmorris.advgamerules.api.rules;
 
+import java.util.Collection;
+
+import net.minecraft.command.ICommandSender;
 import net.minecraft.nbt.NBTTagCompound;
 
 import dev.rndmorris.advgamerules.api.IGameRule;
@@ -39,5 +42,10 @@ public class DoubleGameRule implements IGameRule {
         if (value instanceof DoubleValue doubleValue) {
             tag.setDouble(name, doubleValue.getValue());
         }
+    }
+
+    @Override
+    public Collection<String> tabCompletionValues(ICommandSender commandSender) {
+        return null;
     }
 }

@@ -1,5 +1,8 @@
 package dev.rndmorris.advgamerules.api.rules;
 
+import java.util.Collection;
+
+import net.minecraft.command.ICommandSender;
 import net.minecraft.nbt.NBTTagCompound;
 
 import dev.rndmorris.advgamerules.api.IGameRule;
@@ -39,5 +42,10 @@ public class FloatGameRule implements IGameRule {
         if (value instanceof FloatValue floatValue) {
             tag.setFloat(name, floatValue.getValue());
         }
+    }
+
+    @Override
+    public Collection<String> tabCompletionValues(ICommandSender commandSender) {
+        return null;
     }
 }
