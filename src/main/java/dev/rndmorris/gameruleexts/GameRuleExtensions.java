@@ -1,4 +1,4 @@
-package dev.rndmorris.advgamerules;
+package dev.rndmorris.gameruleexts;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,18 +11,18 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 @Mod(
-    modid = AdvancedGameRules.MODID,
+    modid = GameRuleExtensions.MODID,
     version = Tags.VERSION,
-    name = "Advanced GameRules",
+    name = "GameRule Extensions",
     acceptedMinecraftVersions = "[1.7.10]")
-public class AdvancedGameRules {
+public class GameRuleExtensions {
 
-    public static final String MODID = "advgamerules";
+    public static final String MODID = "gameruleexts";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     @SidedProxy(
-        clientSide = "dev.rndmorris.advgamerules.ClientProxy",
-        serverSide = "dev.rndmorris.advgamerules.CommonProxy")
+        clientSide = "dev.rndmorris.gameruleexts.ClientProxy",
+        serverSide = "dev.rndmorris.gameruleexts.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler

@@ -1,4 +1,4 @@
-package dev.rndmorris.advgamerules;
+package dev.rndmorris.gameruleexts;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;

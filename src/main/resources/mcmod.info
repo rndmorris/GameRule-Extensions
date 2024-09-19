@@ -6,7 +6,7 @@
 		"description": "A library mod that helps mod authors add easily add new game rules",
 		"version": "${modVersion}",
 		"mcversion": "${minecraftVersion}",
-		"url": "https://github.com/rndmorris/advgamerules",
+		"url": "https://github.com/rndmorris/GameRule-Extensions",
 		"updateUrl": "",
 		"authorList": ["rndmorris"],
 		"credits": "",

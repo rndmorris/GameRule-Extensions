@@ -1,4 +1,4 @@
-package dev.rndmorris.advgamerules;
+package dev.rndmorris.gameruleexts;
 
 import java.io.File;
 
