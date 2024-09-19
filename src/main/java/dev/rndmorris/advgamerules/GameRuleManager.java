@@ -5,15 +5,16 @@ import java.util.Map;
 
 import net.minecraft.world.World;
 
+import dev.rndmorris.advgamerules.api.IGameRule;
+import dev.rndmorris.advgamerules.api.IGameRules;
 import dev.rndmorris.advgamerules.api.rules.BooleanGameRule;
-import dev.rndmorris.advgamerules.api.rules.IGameRule;
-import dev.rndmorris.advgamerules.interfaces.IGameRules;
+import dev.rndmorris.advgamerules.interfaces.IMixinGameRules;
 
 public class GameRuleManager {
 
-    private final static Map<String, IGameRule> gameRules = new HashMap<>();
+    public final static Map<String, IGameRule> gameRules = new HashMap<>();
 
-    private final static Map<String, IGameRule> vanillaGameRules = new HashMap<>(9);
+    public final static Map<String, IGameRule> vanillaGameRules = new HashMap<>(9);
 
     static {
         final var vanillaRules = new IGameRule[] { new BooleanGameRule("doFireTick", true),
@@ -41,11 +42,7 @@ public class GameRuleManager {
         return gameRules.get(name);
     }
 
-    public static Map<String, IGameRule> ruleDefinitions() {
-        return gameRules;
-    }
-
-    public static IGameRules gameRules(World world) {
-        return (IGameRules) world.getGameRules();
+    public static IGameRules getGameRules(World world) {
+        return new GameRulesWrapper((IMixinGameRules) world.getGameRules());
     }
 }

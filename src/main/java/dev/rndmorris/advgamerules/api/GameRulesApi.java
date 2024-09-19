@@ -3,7 +3,6 @@ package dev.rndmorris.advgamerules.api;
 import net.minecraft.world.World;
 
 import dev.rndmorris.advgamerules.GameRuleManager;
-import dev.rndmorris.advgamerules.api.rules.IGameRule;
 
 public class GameRulesApi {
 
@@ -15,6 +14,10 @@ public class GameRulesApi {
      */
     public static boolean registerGameRule(IGameRule newGameRule) {
         return GameRuleManager.registerGameRule(newGameRule);
+    }
+
+    public static IGameRules getGameRules(World world) {
+        return GameRuleManager.getGameRules(world);
     }
 
     /**
