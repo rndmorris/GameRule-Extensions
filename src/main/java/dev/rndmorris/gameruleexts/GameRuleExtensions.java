@@ -21,8 +21,8 @@ public class GameRuleExtensions {
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     @SidedProxy(
-        clientSide = "dev.rndmorris.advgamerules.ClientProxy",
-        serverSide = "dev.rndmorris.advgamerules.CommonProxy")
+        clientSide = "dev.rndmorris.gameruleexts.ClientProxy",
+        serverSide = "dev.rndmorris.gameruleexts.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
