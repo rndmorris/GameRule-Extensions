@@ -2,16 +2,16 @@ package dev.rndmorris.advgamerules.api.values;
 
 import dev.rndmorris.advgamerules.api.IRuleValue;
 
-public class BooleanValue implements IRuleValue {
+public class IntegerValue implements IRuleValue {
 
-    private boolean value;
+    private int value;
 
-    public BooleanValue(boolean value) {
+    public IntegerValue(int value) {
         this.value = value;
     }
 
-    public BooleanValue(String value) {
-        this(Boolean.parseBoolean(value));
+    public IntegerValue(String value) {
+        this(Integer.parseInt(value));
     }
 
     @Override
@@ -21,14 +21,14 @@ public class BooleanValue implements IRuleValue {
 
     @Override
     public void setFromValueString(String value) {
-        this.value = Boolean.parseBoolean(value);
+        this.value = Integer.parseInt(value);
     }
 
-    public boolean getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(boolean value) {
+    public void setValue(int value) {
         this.value = value;
     }
 }

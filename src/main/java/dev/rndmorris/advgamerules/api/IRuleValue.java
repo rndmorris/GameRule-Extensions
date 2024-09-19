@@ -1,4 +1,4 @@
-package dev.rndmorris.advgamerules.api.values;
+package dev.rndmorris.advgamerules.api;
 
 public interface IRuleValue {
 

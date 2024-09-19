@@ -4,14 +4,14 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import dev.rndmorris.advgamerules.api.IGameRule;
 import dev.rndmorris.advgamerules.api.IRuleValue;
-import dev.rndmorris.advgamerules.api.values.BooleanValue;
+import dev.rndmorris.advgamerules.api.values.ByteValue;
 
-public class BooleanGameRule implements IGameRule {
+public class ByteGameRule implements IGameRule {
 
     private final String name;
-    private final boolean defaultValue;
+    private final byte defaultValue;
 
-    public BooleanGameRule(String name, boolean defaultValue) {
+    public ByteGameRule(String name, byte defaultValue) {
         this.name = name;
         this.defaultValue = defaultValue;
     }
@@ -23,7 +23,7 @@ public class BooleanGameRule implements IGameRule {
 
     @Override
     public IRuleValue getDefaultValue() {
-        return new BooleanValue(defaultValue);
+        return new ByteValue(defaultValue);
     }
 
     @Override
@@ -31,13 +31,13 @@ public class BooleanGameRule implements IGameRule {
         if (!tag.hasKey(name)) {
             return getDefaultValue();
         }
-        return new BooleanValue(tag.getBoolean(name));
+        return new ByteValue(tag.getByte(name));
     }
 
     @Override
     public void writeValueToNBT(NBTTagCompound tag, IRuleValue value) {
-        if (value instanceof BooleanValue boolValue) {
-            tag.setBoolean(name, boolValue.getValue());
+        if (value instanceof ByteValue byteValue) {
+            tag.setByte(name, byteValue.getValue());
         }
     }
 }

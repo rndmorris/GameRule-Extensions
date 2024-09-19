@@ -4,16 +4,18 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import dev.rndmorris.advgamerules.api.IGameRule;
 import dev.rndmorris.advgamerules.api.IRuleValue;
-import dev.rndmorris.advgamerules.api.values.BooleanValue;
+import dev.rndmorris.advgamerules.api.values.EnumValue;
 
-public class BooleanGameRule implements IGameRule {
+public class EnumGameRule<E extends Enum<E>> implements IGameRule {
 
     private final String name;
-    private final boolean defaultValue;
+    private final E defaultValue;
+    private final Class<E> enumClass;
 
-    public BooleanGameRule(String name, boolean defaultValue) {
+    public EnumGameRule(String name, E defaultValue, Class<E> enumClass) {
         this.name = name;
         this.defaultValue = defaultValue;
+        this.enumClass = enumClass;
     }
 
     @Override
@@ -23,7 +25,7 @@ public class BooleanGameRule implements IGameRule {
 
     @Override
     public IRuleValue getDefaultValue() {
-        return new BooleanValue(defaultValue);
+        return new EnumValue<>(defaultValue, enumClass);
     }
 
     @Override
@@ -31,13 +33,15 @@ public class BooleanGameRule implements IGameRule {
         if (!tag.hasKey(name)) {
             return getDefaultValue();
         }
-        return new BooleanValue(tag.getBoolean(name));
+        final var strValue = tag.getString(name);
+        final var value = Enum.valueOf(enumClass, strValue);
+        return new EnumValue<>(value, enumClass);
     }
 
     @Override
     public void writeValueToNBT(NBTTagCompound tag, IRuleValue value) {
-        if (value instanceof BooleanValue boolValue) {
-            tag.setBoolean(name, boolValue.getValue());
+        if (value != null && enumClass.isAssignableFrom(value.getClass())) {
+            tag.setString(name, value.getValueString());
         }
     }
 }

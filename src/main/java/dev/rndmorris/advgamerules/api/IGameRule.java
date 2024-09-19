@@ -1,8 +1,6 @@
-package dev.rndmorris.advgamerules.api.rules;
+package dev.rndmorris.advgamerules.api;
 
 import net.minecraft.nbt.NBTTagCompound;
-
-import dev.rndmorris.advgamerules.api.values.IRuleValue;
 
 /**
  * A game rule within the AdvancedGameRules API
