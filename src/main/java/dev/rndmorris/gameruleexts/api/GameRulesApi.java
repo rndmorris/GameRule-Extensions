@@ -19,26 +19,4 @@ public class GameRulesApi {
     public static IGameRules getGameRules(World world) {
         return GameRulesManager.getGameRules(world);
     }
-
-    /**
-     * Get a game rule by its name.
-     * 
-     * @param name The name of the rule to get.
-     * @return The rule if it exists, otherwise null.
-     */
-    public static IGameRule getGameRule(World world, String name) {
-        return null;
-    }
-
-    /**
-     * Get a rule of a specific type by its name.
-     * 
-     * @param name  The name of the rule to get.
-     * @param clazz The class of the game rule to get.
-     * @return The game rule if it both exists and is of the specified type, otherwise null.
-     * @param <T> The type of the game rule to get.
-     */
-    public static <T extends IGameRule> T getGameRule(World world, String name, Class<T> clazz) {
-        return null;
-    }
 }
