@@ -1,7 +1,7 @@
 package dev.rndmorris.advgamerules.api.rules;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import net.minecraft.command.ICommandSender;
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,9 +47,9 @@ public class BooleanGameRule implements IGameRule {
 
     @Override
     public Collection<String> tabCompletionValues(ICommandSender commandSender) {
-        final var result = new ArrayList<String>(2);
-        result.set(0, "true");
-        result.set(1, "false");
+        final var result = new LinkedList<String>();
+        result.add("true");
+        result.add("false");
         return result;
     }
 }

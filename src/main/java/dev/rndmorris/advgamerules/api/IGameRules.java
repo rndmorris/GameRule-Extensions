@@ -20,6 +20,14 @@ public interface IGameRules {
     Collection<String> getRuleNames();
 
     /**
+     * Get the definition of the named rule.
+     * 
+     * @param ruleName The name of the rule to find.
+     * @return An IGameRule implementation, or null if the game rule does not exist.
+     */
+    IGameRule getRuleDefinition(String ruleName);
+
+    /**
      * Get a rule's boolean value, or the rule's default value if not set.
      * 
      * @param ruleName The name of the rule to retrieve.

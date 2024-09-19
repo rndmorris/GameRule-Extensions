@@ -2,6 +2,7 @@ package dev.rndmorris.advgamerules;
 
 import java.util.Collection;
 
+import dev.rndmorris.advgamerules.api.IGameRule;
 import dev.rndmorris.advgamerules.api.IGameRules;
 import dev.rndmorris.advgamerules.api.IRuleValue;
 import dev.rndmorris.advgamerules.api.values.BooleanValue;
@@ -26,18 +27,14 @@ public class GameRulesWrapper implements IGameRules {
             .put(ruleName, value);
     }
 
-    private IRuleValue getRule(String ruleName) {
-        return rules.getTheGameRules()
-            .get(ruleName);
-    }
-
     private <I extends IRuleValue> I getRuleValueOrDefault(String ruleName, Class<I> valueClass) {
-        final var ruleValue = getRule(ruleName);
+        final var ruleValue = rules.getTheGameRules()
+            .get(ruleName);
         if (ruleValue != null && valueClass.isAssignableFrom(ruleValue.getClass())) {
             // noinspection unchecked
             return (I) ruleValue;
         }
-        final var definition = GameRulesManager.gameRules.get(ruleName);
+        final var definition = GameRulesManager.getRuleDefinition(ruleName);
         if (definition == null) {
             throw new IllegalArgumentException(
                 String.format("Game rule %s does not exist and was not registered.", ruleName));
@@ -67,6 +64,11 @@ public class GameRulesWrapper implements IGameRules {
     public Collection<String> getRuleNames() {
         return rules.getTheGameRules()
             .keySet();
+    }
+
+    @Override
+    public IGameRule getRuleDefinition(String ruleName) {
+        return GameRulesManager.getRuleDefinition(ruleName);
     }
 
     @Override
