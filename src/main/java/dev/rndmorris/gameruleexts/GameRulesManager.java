@@ -31,7 +31,7 @@ public class GameRulesManager {
         if (vanillaGameRules.containsKey(gameRule.getName())) {
             return false;
         }
-        return gameRules.putIfAbsent(gameRule.getName(), gameRule) != null;
+        return gameRules.putIfAbsent(gameRule.getName(), gameRule) == null;
     }
 
     public static IGameRule getRuleDefinition(String name) {
