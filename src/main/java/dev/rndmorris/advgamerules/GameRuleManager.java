@@ -1,33 +1,51 @@
 package dev.rndmorris.advgamerules;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
-import dev.rndmorris.advgamerules.api.IGameRule;
+import net.minecraft.world.World;
 
-public class GameRuleManager
-{
+import dev.rndmorris.advgamerules.api.rules.BooleanGameRule;
+import dev.rndmorris.advgamerules.api.rules.IGameRule;
+import dev.rndmorris.advgamerules.interfaces.IGameRules;
 
-    private static HashMap<String, IGameRule> gameRuleDefaults = new HashMap<>();
+public class GameRuleManager {
+
+    private final static Map<String, IGameRule> gameRules = new HashMap<>();
+
+    private final static Map<String, IGameRule> vanillaGameRules = new HashMap<>(9);
+
+    static {
+        final var vanillaRules = new IGameRule[] { new BooleanGameRule("doFireTick", true),
+            new BooleanGameRule("mobGriefing", true), new BooleanGameRule("keepInventory", false),
+            new BooleanGameRule("doMobSpawning", true), new BooleanGameRule("doMobLoot", true),
+            new BooleanGameRule("doTileDrops", true), new BooleanGameRule("commandBlockOutput", true),
+            new BooleanGameRule("naturalRegeneration", true), new BooleanGameRule("doDaylightCycle", true), };
+        for (var rule : vanillaRules) {
+            vanillaGameRules.put(rule.getName(), rule);
+        }
+    }
 
     public static boolean registerGameRule(IGameRule gameRule) {
-        return gameRuleDefaults.putIfAbsent(gameRule.getName(), gameRule) != null;
-    }
-
-    public static IGameRule getGameRule(String name) {
-        return gameRuleDefaults.getOrDefault(name, null);
-    }
-
-    public static <T extends IGameRule> T getGameRule(String name, Class<T> clazz) {
-        final var rule = getGameRule(name);
-        if (rule != null && clazz.isAssignableFrom(rule.getClass())) {
-            //noinspection unchecked
-            return (T) rule;
+        if (vanillaGameRules.containsKey(gameRule.getName())) {
+            return false;
         }
-        return null;
+        return gameRules.putIfAbsent(gameRule.getName(), gameRule) != null;
     }
 
-    public static Collection<IGameRule> gameRuleDefaults() {
-        return gameRuleDefaults.values();
+    public static IGameRule getRuleDefinition(String name) {
+        final var vanillaRule = vanillaGameRules.get(name);
+        if (vanillaRule != null) {
+            return vanillaRule;
+        }
+        return gameRules.get(name);
+    }
+
+    public static Map<String, IGameRule> ruleDefinitions() {
+        return gameRules;
+    }
+
+    public static IGameRules gameRules(World world) {
+        return (IGameRules) world.getGameRules();
     }
 }
